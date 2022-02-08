@@ -2,7 +2,7 @@ import {ProductDetails, updateProduct} from "../apiClient/productsApiClient";
 
 import React from "react";
 
-import {Button, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Box} from "@mui/material";
 
@@ -11,9 +11,6 @@ interface ProductListProps {
     products: ProductDetails[];
     refreshState: () => void;
 }
-
-
-
 
 export const ProductList = (props: ProductListProps) => {
 
@@ -26,7 +23,14 @@ export const ProductList = (props: ProductListProps) => {
 
     }
 
+    const removeQuantity = (product: ProductDetails) => {
+        const productId = product.id;
+        const quantity = product.quantity - 1;
+        updateProduct(productId, product, quantity).then(() => {
+            props.refreshState();
+        })
 
+    }
 
     return (
         <>
@@ -47,6 +51,11 @@ export const ProductList = (props: ProductListProps) => {
                             <Button
                                 onClick={()=> addQuantity(product)}
                             >Add Quantity</Button>
+
+                            <Button
+                                onClick={()=> removeQuantity(product)}>
+                                Order
+                            </Button>
 
                             </div>
                     ))}
