@@ -19,5 +19,10 @@ describe("inventory", () => {
       cy.findByRole("button", {name: /Add Quantity/i}).click();
       cy.findByText("1").should("be.visible");
     })
+    it("should display quantity minimized after clicking Order", () => {
+      cy.visit("http://localhost:8080");
+      cy.findByRole("button", {name: /Order/i}).click();
+      cy.findByText("0").should("be.visible");
+    })
   })
 });

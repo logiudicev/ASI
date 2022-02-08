@@ -4,7 +4,7 @@ import App from "../App";
 import userEvent from "@testing-library/user-event";
 import {createProduct, getProducts} from "../components/apiClient/productsApiClient";
 
-jest.mock("../productsApiClient");
+jest.mock("../components/apiClient/productsApiClient");
 const mockGetProducts = getProducts as jest.MockedFunction<typeof getProducts>;
 
 

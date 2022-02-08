@@ -1,6 +1,6 @@
 import {ProductDetails, updateProduct} from "../apiClient/productsApiClient";
 
-import React from "react";
+import React, {useState} from "react";
 
 import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,12 +14,17 @@ interface ProductListProps {
 
 export const ProductList = (props: ProductListProps) => {
 
+    const [orderStatus, setOrderStatus] = useState<string>("")
+
     const addQuantity = (product: ProductDetails) => {
+
         const productId = product.id;
         const quantity = product.quantity + 1;
         updateProduct(productId, product, quantity).then(() => {
             props.refreshState();
         })
+
+        setOrderStatus("You will receive " + (product.quantity = product.quantity + 1) + " " + product.name);
 
     }
 
@@ -30,6 +35,11 @@ export const ProductList = (props: ProductListProps) => {
             props.refreshState();
         })
 
+        if(product.quantity <= 0){
+            setOrderStatus("You will receive " + (product.quantity = product.quantity - 1) + " " + product.name + ". Note that your order was NOT completely fulfilled. Your delivery will be short " + product.quantity + " items.");
+        } else {
+        setOrderStatus("You will receive " + (product.quantity = product.quantity - 1) + " " + product.name);
+        }
     }
 
     return (
@@ -61,6 +71,12 @@ export const ProductList = (props: ProductListProps) => {
                     ))}
                 </Box>
             </Box>
+
+        <div>
+
+            {orderStatus}
+
+        </div>
         </>
     )
 }
