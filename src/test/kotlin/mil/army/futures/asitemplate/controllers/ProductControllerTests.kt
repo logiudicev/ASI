@@ -29,7 +29,8 @@ internal class ProductControllerTests {
         every { productService.addProduct("first-product-name") } returns Product(
             id = 1L,
             name = "first-product-name",
-            quantity = 0
+            quantity = 0,
+            model = "486DX-66",
         )
 
         mockMvc.post("/products") {
