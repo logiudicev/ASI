@@ -13,8 +13,8 @@ class ProductController(private val productService: ProductService) {
     }
 
     @PostMapping("/products")
-    fun addProduct(@RequestBody product: String): Product {
-        return productService.addProduct(product)
+    fun addProduct(@RequestBody product: String) {
+        productService.addProduct(product)
     }
 
     @GetMapping("/hi")

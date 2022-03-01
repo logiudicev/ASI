@@ -31,12 +31,13 @@ export const ProductList = (props: ProductListProps) => {
     const removeQuantity = (product: ProductDetails) => {
         const productId = product.id;
         const quantity = product.quantity - 1;
+
         updateProduct(productId, product, quantity).then(() => {
             props.refreshState();
         })
 
         if(product.quantity <= 0){
-            setOrderStatus("You will receive " + (product.quantity = product.quantity - 1) + " " + product.name + ". Note that your order was NOT completely fulfilled. Your delivery will be short " + product.quantity + " items.");
+            setOrderStatus("You will receive " + (product.quantity = 0) + " " + product.name + ". Note that your order was NOT completely fulfilled. Your delivery will be short " + product.quantity + " items.");
         } else {
         setOrderStatus("You will receive " + (product.quantity = product.quantity - 1) + " " + product.name);
         }
@@ -51,7 +52,7 @@ export const ProductList = (props: ProductListProps) => {
                         <div key={index}>{product.name}</div>
                     ))}
 
-                </Box>
+
 
                 <Box>
                     <h2>Quantity</h2>
@@ -69,6 +70,7 @@ export const ProductList = (props: ProductListProps) => {
 
                             </div>
                     ))}
+                </Box>
                 </Box>
             </Box>
 
