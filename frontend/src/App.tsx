@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import {createProduct, getProducts, ProductDetails} from "./components/apiClient/productsApiClient";
-import {Box, Container} from "@mui/material";
+import {Box, Container, Grid} from "@mui/material";
 import {Product} from "./product";
 import {ProductCreator} from "./components/ProductCreator";
 import {ProductList} from "./components/ProductList/ProductList";
@@ -10,7 +10,7 @@ const App = () => {
     const [refresh, setRefresh] = useState<number>(0)
 
     const refreshState = () => {
-        setRefresh(prevState => prevState + 1)
+        setRefresh(prevState => prevState - 1)
     }
 
 
@@ -19,10 +19,12 @@ const App = () => {
     }, [refresh]);
 
     return (
-        <Container sx={{mx: 1, my: 1}}>
+        <Container sx={{mx: 4, my: 4}}>
             <h1>Parts Unlimited Inventory</h1>
+
             <ProductList products={products} refreshState={refreshState} />
-            <ProductCreator refreshState={refreshState} />
+
+                <ProductCreator refreshState={refreshState} />
         </Container>
     );
 }

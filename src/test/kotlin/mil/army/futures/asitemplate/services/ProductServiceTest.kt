@@ -42,7 +42,7 @@ internal class ProductServiceTest {
     }
 
     @Test
-    fun `should update a person`() {
+    fun `should update a product`() {
 
         val existingProduct = Product(id = 1L, name = "Wrench", quantity = 1)
 
